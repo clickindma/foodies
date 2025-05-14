@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaap E Punjab - Authentic North Indian & Chinese Fusion</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #f1a33c;
+            --accent: #ff6d00;
+            --dark: #1d1d1d;
+            --light: #f9f7f3;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .bg-primary {
+            background-color: var(--primary);
+        }
+
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+
+        .bg-accent {
+            background-color: var(--accent);
+        }
+
+        .bg-dark {
+            background-color: var(--dark);
+        }
+
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-secondary {
+            color: var(--secondary);
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(241, 163, 60, 0.4);
+        }
+
+        .navbar {
+            transition: all 0.5s;
+            z-index: 100;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--dark);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1613292443284-8d10ef9383fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .menu-item {
+            transition: all 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item img {
+            transition: all 0.5s;
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 300px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background-color: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+        }
+
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .gallery-img {
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .gallery-img img {
+            transition: transform 0.5s;
+        }
+
+        .gallery-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary) !important;
+        }
+
+        /* Price tab styles */
+        .price-tab {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .price-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Animated patterns */
+        .pattern {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .pattern-1 {
+            top: 10%;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e63946' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .pattern-2 {
+            bottom: 5%;
+            right: 5%;
+            width: 400px;
+            height: 400px;
+            background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f1a33c' fill-opacity='1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 60vh;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            h2 {
+                font-size: 2rem !important;
+            }
+            
+            .counter {
+                font-size: 2rem;
+            }
+            
+            .pattern {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+         .brand-name {
+            font-family: 'Kaushan Script', cursive;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 w-full py-3 px-4 md:px-10 flex justify-between items-center transition-all duration-300 z-50">
+         <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="brand-name text-3xl text-orange-600" style="font-family: 'Kaushan Script', cursive; color: white;">Chaap E Punjab</h1>
+                    <p class="text-sm text-gray-600" style="font-family: 'Kaushan Script', cursive; color: white;">North Indian, Chinese, Kebab</p>
+                </div>
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="#home" class="text-white hover:text-secondary transition-colors">Home</a>
+            <a href="#about" class="text-white hover:text-secondary transition-colors">About</a>
+            <a href="#menu" class="text-white hover:text-secondary transition-colors">Menu</a>
+            <a href="#gallery" class="text-white hover:text-secondary transition-colors">Gallery</a>
+            <a href="#contact" class="text-white hover:text-secondary transition-colors">Contact</a>
+        </div>
+        <div class="md:hidden">
+            <button id="menuToggle" class="text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden fixed top-0 left-0 w-full h-screen bg-dark z-40 flex flex-col items-center justify-center space-y-8 text-xl">
+        <button id="closeMenu" class="absolute top-5 right-5 text-white text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" class="text-white hover:text-secondary transition-colors">Home</a>
+        <a href="#about" class="text-white hover:text-secondary transition-colors">About</a>
+        <a href="#menu" class="text-white hover:text-secondary transition-colors">Menu</a>
+        <a href="#gallery" class="text-white hover:text-secondary transition-colors">Gallery</a>
+        <a href="#contact" class="text-white hover:text-secondary transition-colors">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero flex items-center justify-center">
+        <div class="container mx-auto px-4 py-16 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6" data-aos="fade-up">Chaap E Punjab</h1>
+                <p class="text-2xl md:text-3xl mb-10" data-aos="fade-up" data-aos-delay="200">Taste the Tradition of North India & Chinese Fusion</p>
+                <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#menu" class="btn-primary px-8 py-4 rounded-full font-bold text-lg flex items-center">
+                        <i class="fas fa-utensils mr-2"></i> Order Online
+                    </a>
+                    <a href="#contact" class="btn-secondary px-8 py-4 rounded-full font-bold text-lg flex items-center">
+                        <i class="fas fa-map-marker-alt mr-2"></i> Get Directions
+                    </a>
+                    <a href="tel:+919680072122" class="bg-dark text-white px-8 py-4 rounded-full font-bold text-lg flex items-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-phone-alt mr-2"></i> Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full flex justify-center">
+            <div class="bg-white p-4 rounded-t-lg shadow-lg flex flex-wrap justify-center gap-6 text-center">
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-star text-secondary text-xl"></i>
+                    <p class="font-bold">3.8 Rating</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-rupee-sign text-secondary text-xl"></i>
+                    <p class="font-bold">₹300 for two</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-clock text-secondary text-xl"></i>
+                    <p class="font-bold">Opens at 3:15 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="pattern pattern-1"></div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold relative inline-block" data-aos="fade-up">
+                    About Us
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"></span>
+                </h2>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <div class="rounded-lg overflow-hidden shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior" class="w-full h-auto">
+                    </div>
+                </div>
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <h3 class="text-3xl font-bold mb-6 text-primary">Our Story</h3>
+                    <p class="text-lg mb-6">At Chaap E Punjab, we bring you the authentic flavors of North India with a touch of Chinese fusion. Our chefs carefully prepare each dish using traditional recipes and the freshest ingredients to create a memorable dining experience.</p>
+                    <p class="text-lg mb-8">Specializing in tandoori chaap, kebabs, and a variety of vegetarian delicacies that mimic the taste and texture of non-vegetarian favorites, we've created a unique culinary experience that has won the hearts of food lovers in Kota.</p>
+                    <div class="flex flex-wrap gap-5">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mr-4">
+                                <i class="fas fa-utensils text-white text-xl"></i>
+                            </div>
+                            <span class="font-bold text-lg">North Indian</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mr-4">
+                                <i class="fas fa-utensils text-white text-xl"></i>
+                            </div>
+                            <span class="font-bold text-lg">Chinese</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mr-4">
+                                <i class="fas fa-fire text-white text-xl"></i>
+                            </div>
+                            <span class="font-bold text-lg">Kebab</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold relative inline-block" data-aos="fade-up">
+                    Featured Dishes
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"></span>
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Malai Chaap" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Malai Chaap</h3>
+                        <p class="text-gray-600 mb-4">Tender soya chaap marinated in creamy sauce and grilled to perfection</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹140 / ₹250</span>
+                            <span class="bg-secondary text-dark px-3 py-1 rounded-full text-sm font-bold">Bestseller</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Tandoori" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Veg Tandoori Butter Leg Piece</h3>
+                        <p class="text-gray-600 mb-4">Innovative vegetarian alternative to chicken leg, tandoor-grilled with butter</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹170 / ₹300</span>
+                            <span class="bg-secondary text-dark px-3 py-1 rounded-full text-sm font-bold">Popular</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1606471191009-63994c53433b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Paneer Tikka" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Malai Paneer Tikka</h3>
+                        <p class="text-gray-600 mb-4">Fresh cottage cheese cubes marinated in creamy sauce and spices</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹170 / ₹300</span>
+                            <span class="bg-secondary text-dark px-3 py-1 rounded-full text-sm font-bold">Chef's Choice</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chef Recommendations with Flip Cards -->
+    <section class="py-20">
+        <div class="pattern pattern-2"></div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold relative inline-block" data-aos="fade-up">
+                    Chef Recommendations
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"></span>
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="flip-card" data-aos="flip-left" data-aos-duration="1000">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white shadow-lg">
+                            <div class="h-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Butter Chicken" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                    <h3 class="text-white text-2xl font-bold">Veg Butter Chicken</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-2xl font-bold mb-3">Veg Butter Chicken</h3>
+                            <p class="mb-3 text-center">Our signature dish that perfectly mimics the iconic butter chicken with vegetarian ingredients.</p>
+                            <p class="font-bold text-lg">₹170 / ₹300</p>
+                            <div class="mt-4">
+                                <span class="px-3 py-1 bg-dark text-white rounded-full text-sm">Chef's Special</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white shadow-lg">
+                            <div class="h-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Naughty Chaap" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                    <h3 class="text-white text-2xl font-bold">Naughty Chaap</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-2xl font-bold mb-3">Naughty Chaap</h3>
+                            <p class="mb-3 text-center">A playful twist on traditional chaap with secret spice blend and grilling technique.</p>
+                            <p class="font-bold text-lg">₹170 / ₹300</p>
+                            <div class="mt-4">
+                                <span class="px-3 py-1 bg-dark text-white rounded-full text-sm">Most Ordered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white shadow-lg">
+                            <div class="h-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1541518763669-27fef9b49542?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg KFC Wings" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                    <h3 class="text-white text-2xl font-bold">Veg KFC Wings</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-2xl font-bold mb-3">Veg KFC Wings</h3>
+                            <p class="mb-3 text-center">Crispy plant-based "wings" with our special coating that rivals the famous original.</p>
+                            <p class="font-bold text-lg">₹170 / ₹300</p>
+                            <div class="mt-4">
+                                <span class="px-3 py-1 bg-dark text-white rounded-full text-sm">New Favorite</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section class="py-16 bg-dark text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div data-aos="fade-up">
+                    <div class="counter" data-target="500">0</div>
+                    <p class="text-lg mt-2">Daily Customers</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="counter" data-target="50">0</div>
+                    <p class="text-lg mt-2">Menu Items</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400">
+                    <div class="counter" data-target="10">0</div>
+                    <p class="text-lg mt-2">Years of Experience</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="600">
+                    <div class="counter" data-target="4.8">0</div>
+                    <p class="text-lg mt-2">Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold relative inline-block" data-aos="fade-up">
+                    What Customers Say
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"></span>
+                </h2>
+            </div>
+            <div class="swiper testimonialSwiper" data-aos="fade-up">
+                <div class="swiper-wrapper pb-10">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-8">
+                            <div class="flex items-center mb-4">
+                                <div class="w-14 h-14 rounded-full bg-gray-300 overflow-hidden mr-4">
+                                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Customer" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Rajesh Kumar</h4>
+                                    <div class="flex text-secondary">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"The vegetarian alternatives to non-veg dishes are mind-blowing! I couldn't believe the Veg Butter Chicken wasn't actual chicken. Perfect for vegetarians who miss the taste of meat dishes."</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-8">
+                            <div class="flex items-center mb-4">
+                                <div class="w-14 h-14 rounded-full bg-gray-300 overflow-hidden mr-4">
+                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Customer" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Priya Sharma</h4>
+                                    <div class="flex text-secondary">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"The Malai Chaap is simply divine! The creamy texture and perfect blend of spices make it my go-to dish. Their delivery is also prompt and packaging keeps food warm."</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card p-8">
+                            <div class="flex items-center mb-4">
+                                <div class="w-14 h-14 rounded-full bg-gray-300 overflow-hidden mr-4">
+                                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Customer" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Vikram Singh</h4>
+                                    <div class="flex text-secondary">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"As someone who recently turned vegetarian, I was missing kebabs badly until I discovered Chaap E Punjab. Their Veg Kababs taste exactly like the real thing! Great value for money too."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold relative inline-block" data-aos="fade-up">
+                    Our Menu
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"></span>
+                </h2>
+            </div>
+            
+            <!-- Menu Tabs -->
+            <div class="flex flex-wrap justify-center mb-12 gap-3" data-aos="fade-up">
+                <button class="menu-tab active px-5 py-3 rounded-full bg-primary text-white font-bold transition-all hover:shadow-lg" data-tab="special-tandoori">SPECIAL VEG TANDOORI</button>
+                <button class="menu-tab px-5 py-3 rounded-full bg-gray-200 text-gray-800 font-bold transition-all hover:shadow-lg" data-tab="funny-chaap">FUNNY CHAAP</button>
+                <button class="menu-tab px-5 py-3 rounded-full bg-gray-200 text-gray-800 font-bold transition-all hover:shadow-lg" data-tab="kababs">KABABS</button>
+                <button class="menu-tab px-5 py-3 rounded-full bg-gray-200 text-gray-800 font-bold transition-all hover:shadow-lg" data-tab="paneer">PANEER ITEMS</button>
+                <button class="menu-tab px-5 py-3 rounded-full bg-gray-200 text-gray-800 font-bold transition-all hover:shadow-lg" data-tab="special-fry">SPECIAL VEG FRY</button>
+                <button class="menu-tab px-5 py-3 rounded-full bg-gray-200 text-gray-800 font-bold transition-all hover:shadow-lg" data-tab="special-gravy">SPECIAL VEG GRAVY</button>
+            </div>
+            
+            <!-- Price Toggle -->
+            <div class="flex justify-center mb-8">
+                <div class="price-tab active" data-price="half">Half</div>
+                <div class="price-tab" data-price="full">Full</div>
+            </div>
+            
+            <!-- Menu Content -->
+            <div class="tab-content active" id="special-tandoori">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Malai Tikka" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Malai Tikka With Desi Ghee</h3>
+                            <p class="text-gray-600 mb-4">Creamy tikka prepared with pure desi ghee for authentic flavor</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹200</span>
+                                <span class="text-primary font-bold price-full hidden">₹350</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Malai Chaap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Malai Chaap</h3>
+                            <p class="text-gray-600 mb-4">Tender soya chaap marinated in creamy sauce</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹140</span>
+                                <span class="text-primary font-bold price-full hidden">₹250</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Punjabi Chaap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Punjabi Chaap</h3>
+                            <p class="text-gray-600 mb-4">Traditional Punjabi-style marinated soya chaap</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹140</span>
+                                <span class="text-primary font-bold price-full hidden">₹250</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1534939561126-855b8675edd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Afghani Chaap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Afghani Chaap</h3>
+                            <p class="text-gray-600 mb-4">Mild and creamy with Afghani-inspired spices</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹140</span>
+                                <span class="text-primary font-bold price-full hidden">₹250</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1613292443284-8d10ef9383fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Achari Chaap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Achari Chaap</h3>
+                            <p class="text-gray-600 mb-4">Tangy pickle-flavored marinade with traditional spices</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹140</span>
+                                <span class="text-primary font-bold price-full hidden">₹250</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="funny-chaap">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Tandoori Butter Leg Piece" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg Tandoori Butter Leg Piece</h3>
+                            <p class="text-gray-600 mb-4">Shaped like chicken leg, but made with soya proteins</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Chicken Tikka" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg Chicken Tikka</h3>
+                            <p class="text-gray-600 mb-4">Plant-based tikka with authentic chicken-like taste</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1577303886844-05b134031d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Naughty Chaap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Naughty Chaap</h3>
+                            <p class="text-gray-600 mb-4">Our signature playful creation with secret spice blend</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="kababs">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1625398407796-82650a8c9dd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Kabab" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg Kabab</h3>
+                            <p class="text-gray-600 mb-4">Mixed vegetable kababs with aromatic spices</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹140</span>
+                                <span class="text-primary font-bold price-full hidden">₹250</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1606728035253-49e8a23146de?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Malai Kabab" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg Malai Kabab</h3>
+                            <p class="text-gray-600 mb-4">Creamy vegetarian kababs with rich flavor</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹140</span>
+                                <span class="text-primary font-bold price-full hidden">₹250</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1644364935906-792b2245a2c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg KFC Style Kabab" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg KFC Style Kabab</h3>
+                            <p class="text-gray-600 mb-4">Crispy coated vegetable kababs with secret spices</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="paneer">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1606471191009-63994c53433b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Paneer Tikka" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Paneer Tikka</h3>
+                            <p class="text-gray-600 mb-4">Classic cottage cheese cubes marinated with spices</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Malai Paneer Tikka" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Malai Paneer Tikka</h3>
+                            <p class="text-gray-600 mb-4">Creamy marinated paneer cubes grilled to perfection</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Afghani Paneer Tikka" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Afghani Paneer Tikka</h3>
+                            <p class="text-gray-600 mb-4">White creamy marination with mild spices</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="special-fry">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1541518763669-27fef9b49542?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg KFC Wings" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg KFC Wings</h3>
+                            <p class="text-gray-600 mb-4">Crispy plant-based wings that taste like the real thing</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg KFC Crispy Chaap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg KFC Crispy Chaap</h3>
+                            <p class="text-gray-600 mb-4">Extra crispy coated soya chaap in KFC-style</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1625398407796-82650a8c9dd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg KFC Leg Piece" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg KFC Leg Piece</h3>
+                            <p class="text-gray-600 mb-4">Soya-based crispy leg pieces with secret spice mix</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="special-gravy">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1589647363585-f4a7d3877b10?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Butter Chicken" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg Butter Chicken</h3>
+                            <p class="text-gray-600 mb-4">Vegetarian version of the classic butter chicken</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Veg Mutton Gravy Chaap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Veg Mutton Gravy Chaap</h3>
+                            <p class="text-gray-600 mb-4">Chaap in rich gravy that mimics mutton curry</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item bg-white shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-40 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1548943487-a2e4e43b4853?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Kadai Chaap Gravy" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Kadai Chaap Gravy</h3>
+                            <p class="text-gray-600 mb-4">Chaap cooked with bell peppers in spicy kadai masala</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold price-half">₹170</span>
+                                <span class="text-primary font-bold price-full hidden">₹300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold relative inline-block" data-aos="fade-up">
+                    Gallery & Reviews
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"></span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-img" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+                <div class="gallery-img" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+                <div class="gallery-img" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1606471191009-63994c53433b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+                <div class="gallery-img" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+                <div class="gallery-img" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1541518763669-27fef9b49542?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+                <div class="gallery-img" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1625398407796-82650a8c9dd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+                <div class="gallery-img" data-aos="zoom-in" data-aos-delay="600">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+                <div class="gallery-img" data-aos="zoom-in" data-aos-delay="700">
+                    <img src="https://images.unsplash.com/photo-1589647363585-f4a7d3877b10?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gallery" class="w-full h-48 object-cover">
+                </div>
+            </div>
+            
+            <div class="mt-16">
+                <h3 class="text-3xl font-bold mb-8 text-center" data-aos="fade-up">Write a Review</h3>
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                    <form id="reviewForm" class="space-y-6" data-aos="fade-up">
+                        <div class="relative">
+                            <input type="text" id="name" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary peer" placeholder=" " required>
+                            <label for="name" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-2 peer-focus:text-primary peer-focus:text-sm peer-focus:bg-white peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:text-primary peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white peer-[:not(:placeholder-shown)]:px-2">Your Name</label>
+                        </div>
+                        <div class="relative">
+                            <input type="email" id="email" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary peer" placeholder=" " required>
+                            <label for="email" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-2 peer-focus:text-primary peer-focus:text-sm peer-focus:bg-white peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:text-primary peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white peer-[:not(:placeholder-shown)]:px-2">Your Email</label>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-gray-700">Your Rating</label>
+                            <div class="flex text-2xl text-gray-400 star-rating">
+                                <i class="fas fa-star cursor-pointer" data-rating="1"></i>
+                                <i class="fas fa-star cursor-pointer" data-rating="2"></i>
+                                <i class="fas fa-star cursor-pointer" data-rating="3"></i>
+                                <i class="fas fa-star cursor-pointer" data-rating="4"></i>
+                                <i class="fas fa-star cursor-pointer" data-rating="5"></i>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <textarea id="review" rows="5" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary peer" placeholder=" " required></textarea>
+                            <label for="review" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-2 peer-focus:text-primary peer-focus:text-sm peer-focus:bg-white peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:text-primary peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white peer-[:not(:placeholder-shown)]:px-2">Your Review</label>
+                        </div>
+                        <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg font-bold text-lg hover:bg-opacity-90 transition-all">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold relative inline-block" data-aos="fade-up">
+                    Contact Us
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"></span>
+                </h2>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-10">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <div class="bg-gray-900 p-8 rounded-lg h-full">
+                        <h3 class="text-2xl font-bold mb-6 text-secondary">Get In Touch</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold mb-1">Our Location</h4>
+                                    <p>A33, Jawahar Nagar, District Centre, Talwandi, Kota</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold mb-1">Call Us</h4>
+                                    <p><a href="tel:+919680072122" class="hover:text-secondary transition-colors">+91 9680072122</a></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-clock text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold mb-1">Opening Hours</h4>
+                                    <p>Opens at 3:15 PM</p>
+                                    <p>Monday to Sunday</p>
+                                </div>
+                            </div>
+                            <div class="pt-6">
+                                <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                        <i class="fab fa-facebook-f text-white"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                        <i class="fab fa-instagram text-white"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                        <i class="fab fa-twitter text-white"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                        <i class="fab fa-youtube text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <div class="h-full">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3611.500346919784!2d75.8526!3d25.1403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA4JzI1LjAiTiA3NcKwNTEnMDkuNCJF!5e0!3m2!1sen!2sin!4v1625302412523!5m2!1sen!2sin" width="100%" height="100%" style="border:0; border-radius: 10px; min-height: 400px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark py-8 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-gray-400">
+                <h3 class="text-2xl font-bold mb-4 text-white">Chaap E <span class="text-secondary">Punjab</span></h3>
+                <p class="mb-6">Taste the Tradition of North India & Chinese Fusion</p>
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <a href="#home" class="text-gray-400 hover:text-secondary transition-colors">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-secondary transition-colors">About</a>
+                    <a href="#menu" class="text-gray-400 hover:text-secondary transition-colors">Menu</a>
+                    <a href="#gallery" class="text-gray-400 hover:text-secondary transition-colors">Gallery</a>
+                    <a href="#contact" class="text-gray-400 hover:text-secondary transition-colors">Contact</a>
+                </div>
+                <p>&copy; 2023 Chaap E Punjab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Initialize Swiper
+        const testimonialSwiper = new Swiper('.testimonialSwiper', {
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+        
+        // Menu tabs
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                menuTabs.forEach(t => t.classList.remove('active', 'bg-primary', 'text-white'));
+                tab.classList.add('active', 'bg-primary', 'text-white');
+                
+                const tabId = tab.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Price tabs
+        const priceTabs = document.querySelectorAll('.price-tab');
+        const priceHalf = document.querySelectorAll('.price-half');
+        const priceFull = document.querySelectorAll('.price-full');
+        
+        priceTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                priceTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const priceType = tab.getAttribute('data-price');
+                if (priceType === 'half') {
+                    priceHalf.forEach(price => price.classList.remove('hidden'));
+                    priceFull.forEach(price => price.classList.add('hidden'));
+                } else {
+                    priceHalf.forEach(price => price.classList.add('hidden'));
+                    priceFull.forEach(price => price.classList.remove('hidden'));
+                }
+            });
+        });
+        
+        // Star rating
+        const stars = document.querySelectorAll('.star-rating i');
+        let rating = 0;
+        
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                rating = star.getAttribute('data-rating');
+                updateStars();
+            });
+            
+            star.addEventListener('mouseover', () => {
+                const hoverRating = star.getAttribute('data-rating');
+                highlightStars(hoverRating);
+            });
+            
+            star.addEventListener('mouseout', () => {
+                highlightStars(rating);
+            });
+        });
+        
+        function updateStars() {
+            highlightStars(rating);
+        }
+        
+        function highlightStars(num) {
+            stars.forEach(star => {
+                const starRating = star.getAttribute('data-rating');
+                if (starRating <= num) {
+                    star.classList.add('text-secondary');
+                    star.classList.remove('text-gray-400');
+                } else {
+                    star.classList.remove('text-secondary');
+                    star.classList.add('text-gray-400');
+                }
+            });
+        }
+        
+        // Review form submission
+        const reviewForm = document.getElementById('reviewForm');
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const review = document.getElementById('review').value;
+            
+            // Typically you would send this data to a server
+            alert(`Thank you for your review, ${name}! We appreciate your feedback.`);
+            reviewForm.reset();
+            rating = 0;
+            updateStars();
+        });
+        
+        // Animated counters
+        const counters = document.querySelectorAll('.counter');
+        
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60fps
+                let currentValue = 0;
+                
+                const updateCounter = () => {
+                    currentValue += increment;
+                    
+                    if (currentValue >= target) {
+                        counter.textContent = target.toString().includes('.') ? target.toFixed(1) : target;
+                    } else {
+                        counter.textContent = currentValue.toFixed(1);
+                        requestAnimationFrame(updateCounter);
+                    }
+                };
+                
+                updateCounter();
+            });
+        };
+        
+        // Start counters when they come into view
+        const counterSection = document.querySelector('.counter').closest('section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(counterSection);
+    </script>
+</body>
+
+</html>
